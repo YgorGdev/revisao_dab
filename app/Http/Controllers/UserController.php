@@ -23,8 +23,18 @@ class UserController extends Controller
         return ['status' => true, 'message' => Geral::USUARIO_ENCONTRADO, "usuario" => $user];
     }
 
+    /**
+     * Cria um novo usuário, atribuindo o tipo padrão (Inquilino = 3).
+     *
+     * @param UserRequest $request
+     * @return array
+     */
     public function create(UserRequest $request)
     {
+        $DEFAULT_USER_TYPE_ID = 3;
+
+        $request->merge(['tipo_usuario_id' => $DEFAULT_USER_TYPE_ID]);
+
         $user = $this->service->create($request);
 
         return ['status' => true, 'message' => Geral::USUARIO_CADASTRADO, "usuario" => $user];

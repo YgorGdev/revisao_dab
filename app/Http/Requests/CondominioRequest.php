@@ -18,6 +18,7 @@ class CondominioRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // Autoriza a requisição apenas se o usuário for um 'Proprietário'
         $isProprietario = $this->rule->isProprietario();
 
         return $isProprietario;
@@ -31,11 +32,15 @@ class CondominioRequest extends FormRequest
     public function rules(): array
     {
         return [
+            // Regras de validação conforme solicitado:
             'condominio' => 'sometimes|string',
             'endereco' => 'required|string'
         ];
     }
 
+    /**
+     * Define mensagens de erro customizadas.
+     */
     public function messages(): array
     {
         return [
